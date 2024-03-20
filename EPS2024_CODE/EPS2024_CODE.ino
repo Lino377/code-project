@@ -1,6 +1,7 @@
 #include <Wire.h>
 #include "define.h"
 #include <U8g2lib.h>
+#include <MCP23017.h>
 
 void loop() {
   u8g2.setFontDirection(0);
@@ -180,11 +181,62 @@ u8g2.firstPage();
 }
 
 void workinprogress(void){
+  while(1){
   u8g2.setFontDirection(0);
   u8g2.firstPage();
 do{
+    u8g2.firstPage();
     u8g2.setFont(u8g2_font_mozart_nbp_tr);
-    u8g2.drawStr(5,55,"work in progress");
+    u8g2.drawStr(5,15,"test I/O");
+    u8g2.drawStr(5,35,"SW1 = test input");
+    u8g2.drawStr(5,55,"SW2 = test output");
+    if(digitalRead(SW1) == 0){
+      testIn();
+    }else if(digitalRead(SW2) == 0){
+      testOut();
+    }
   } while( u8g2.nextPage() );
   delay(1000);
+}
+}
+
+void testIn(void){
+  u8g2.setFontDirection(0);
+  u8g2.firstPage();
+do{
+    u8g2.firstPage();
+    adc0 = analogRead(ADC0);
+    adc1 = analogRead(ADC1);
+    adc2 = analogRead(ADC2);
+    adc3 = analogRead(ADC3);
+    adc4 = analogRead(ADC4);
+    u8g2.setFont(u8g2_font_mozart_nbp_tr);
+    u8g2.drawStr(60,15,"test I/O");
+    u8g2.drawStr(5,17,"ADC0:");
+    u8g2.setCursor(35, 17);
+    u8g2.print(adc0);
+    u8g2.drawStr(5,27,"ADC1:");
+    u8g2.setCursor(35, 27);
+    u8g2.print(adc1);
+    u8g2.drawStr(5,37,"ADC2:");
+    u8g2.setCursor(35, 37);
+    u8g2.print(adc2);
+    u8g2.drawStr(5,47,"ADC3:");
+    u8g2.setCursor(35, 47);
+    u8g2.print(adc3);
+    u8g2.drawStr(5,57,"ADC4:");
+    u8g2.setCursor(35, 57);
+    u8g2.print(adc4);
+    /*u8g2.drawStr(5,55,"SW2 = test output");
+    if(digitalRead(SW1) == 0){
+      testIn();
+    }else if(digitalRead(SW2) == 0){
+      testOut();
+    }*/
+  } while( u8g2.nextPage() );
+  delay(1000);
+}
+
+void testOut(void){
+  
 }
