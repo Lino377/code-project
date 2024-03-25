@@ -16,6 +16,11 @@ U8G2_SSD1309_128X64_NONAME0_F_HW_I2C u8g2(U8G2_R0, /*reset=*/U8X8_PIN_NONE);
 
 #define I2C_ADRESS 0x3C 
 #define MCP23017 0x24 
+float  moyadc0 =0;
+float  moyadc1 =0;
+float  moyadc2 =0;
+float  moyadc3 =0;
+float  moyadc4 =0;
 float adc0 =0;
 float adc1 =0;
 float adc2 =0;
