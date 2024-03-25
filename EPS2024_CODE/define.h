@@ -16,11 +16,11 @@ U8G2_SSD1309_128X64_NONAME0_F_HW_I2C u8g2(U8G2_R0, /*reset=*/U8X8_PIN_NONE);
 
 #define I2C_ADRESS 0x3C 
 #define MCP23017 0x24 
-int adc0 =0;
-int adc1 =0;
-int adc2 =0;
-int adc3 =0;
-int adc4 =0;
+float adc0 =0;
+float adc1 =0;
+float adc2 =0;
+float adc3 =0;
+float adc4 =0;
 void setup() {
   // put your setup code here, to run once:
 pinMode(ADC0, INPUT);
