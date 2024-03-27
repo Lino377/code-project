@@ -26,6 +26,7 @@ float adc1 =0;
 float adc2 =0;
 float adc3 =0;
 float adc4 =0;
+int divi = 2;
 void setup() {
   // put your setup code here, to run once:
 pinMode(ADC0, INPUT);

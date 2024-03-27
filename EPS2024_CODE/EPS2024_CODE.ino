@@ -202,7 +202,12 @@ do{
 }
 
 void testInlong(void){
- for (int i = 1; i <= 26; i++) {
+    moyadc0 = 0;
+    moyadc1 = 0;
+    moyadc2 = 0;
+    moyadc3 = 0;
+    moyadc4 = 0;
+ for (int i = 1; i <= 11; i++) {
   u8g2.setFontDirection(0);
   u8g2.firstPage();
 do{
@@ -222,11 +227,20 @@ do{
     moyadc2 += adc2;
     moyadc3 += adc3;
     moyadc4 += adc4;
-    moyadc0 = moyadc0/i;
-    moyadc1 = moyadc1/i;
-    moyadc2 = moyadc2/i;
-    moyadc3 = moyadc3/i;
-    moyadc4 = moyadc4/i;
+    if(i<2){
+      moyadc0 = moyadc0/i;
+      moyadc1 = moyadc1/i;
+      moyadc2 = moyadc2/i;
+      moyadc3 = moyadc3/i;
+      moyadc4 = moyadc4/i;
+    }else if(i > 1){
+      moyadc0 = moyadc0/divi;
+      moyadc1 = moyadc1/divi;
+      moyadc2 = moyadc2/divi;
+      moyadc3 = moyadc3/divi;
+      moyadc4 = moyadc4/divi;
+    }
+
     u8g2.setFont(u8g2_font_mozart_nbp_tr);
     u8g2.drawStr(45,7,"test I/O");
     u8g2.drawStr(5,17,"ADC0:");
