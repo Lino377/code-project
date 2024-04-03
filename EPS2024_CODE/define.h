@@ -15,7 +15,7 @@
 U8G2_SSD1309_128X64_NONAME0_F_HW_I2C u8g2(U8G2_R0, /*reset=*/U8X8_PIN_NONE);  
 
 #define I2C_ADRESS 0x3C 
-#define MCP23017 0x24 
+#define MCP23017 0x40 
 float  moyadc0 =0;
 float  moyadc1 =0;
 float  moyadc2 =0;
@@ -40,4 +40,8 @@ pinMode(SW1, INPUT_PULLUP);
 pinMode(SW2, INPUT_PULLUP);
 Wire.begin();
 u8g2.begin();
+Wire.beginTransmission(MCP23017);
+Wire.write(0x01); //selects the IODIRB register
+Wire.write(0xFF); // sets all port B pins to outputs
+Wire.endTransmission(); //ends communication with slave device
 }

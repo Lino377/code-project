@@ -273,9 +273,12 @@ do{
 }
 }
 void testOutshort(void){
-  
+   Wire.beginTransmission(MCP23017);
+   Wire.write(0x13); 
+   Wire.read(0x01); 
+   Wire.endTransmission(); //ends communication with slave device
 }
 
 void testOutlong(void){
-  
+   Wire.beginTransmission(MCP23017);
 }
