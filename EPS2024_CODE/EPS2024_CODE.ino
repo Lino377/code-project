@@ -175,11 +175,11 @@ do{
     adc2 = analogRead(ADC2);
     adc3 = analogRead(ADC3);
     adc4 = analogRead(ADC4);
-    adc0 = adc0*4883/1000000;
-    adc1 = adc1*4883/1000000;
-    adc2 = adc2*4883/1000000;
-    adc3 = adc3*4883/1000000;
-    adc4 = adc4*4883/1000000;
+    adc0 = adc0*4888/1000000;
+    adc1 = adc1*4888/1000000;
+    adc2 = adc2*4888/1000000;
+    adc3 = adc3*4888/1000000;
+    adc4 = adc4*4888/1000000;
     u8g2.setFont(u8g2_font_mozart_nbp_tr);
     u8g2.drawStr(45,7,"test I/O");
     u8g2.drawStr(5,17,"ADC0:");
@@ -217,11 +217,11 @@ do{
     adc2 = analogRead(ADC2);
     adc3 = analogRead(ADC3);
     adc4 = analogRead(ADC4);
-    adc0 = adc0*4883/1000000;
-    adc1 = adc1*4883/1000000;
-    adc2 = adc2*4883/1000000;
-    adc3 = adc3*4883/1000000;
-    adc4 = adc4*4883/1000000;
+    adc0 = adc0*4888/1000000;
+    adc1 = adc1*4888/1000000;
+    adc2 = adc2*4888/1000000;
+    adc3 = adc3*4888/1000000;
+    adc4 = adc4*4888/1000000;
     moyadc0 += adc0;
     moyadc1 += adc1;
     moyadc2 += adc2;
@@ -273,12 +273,31 @@ do{
 }
 }
 void testOutshort(void){
-   Wire.beginTransmission(MCP23017);
+   Wire.beginTransmission(MCP23017_W);
    Wire.write(0x13); 
-   Wire.read(0x01); 
+   Wire.beginTransmission(MCP23017_W);
+   Wire.write(0x01); 
    Wire.endTransmission(); //ends communication with slave device
 }
 
+
 void testOutlong(void){
-   Wire.beginTransmission(MCP23017);
+   Wire.beginTransmission(MCP23017_W);
+   Wire.write(0x05);
+   Wire.beginTransmission(MCP23017_R);
+   while(Wire.available()) {
+   char x = Wire.read();
+   while(true){
+    u8g2.setFontDirection(0);
+    u8g2.firstPage();
+    do{
+    u8g2.setFont(u8g2_font_mozart_nbp_tr);
+    u8g2.setCursor(0, 15);
+    u8g2.print(x);
+  } while( u8g2.nextPage() );
+  delay(1000);
+   }
+  }
+    Wire.endTransmission(); //ends communication with slave device
 }
+
